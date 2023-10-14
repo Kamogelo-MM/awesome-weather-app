@@ -89,14 +89,16 @@ function handleSubmit(event) {
   let city = document.querySelector("#exampleDataList").value;
   searchCity(city);
 }
-function getCurrentLocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(searchLocation);
-}
+
 function searchLocation(position) {
   let apiKey = "9fc74ee844c3def648338cc86ea0665b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeather);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
 let searchResult = document.querySelector("#form");
@@ -105,4 +107,4 @@ searchResult.addEventListener("submit", handleSubmit);
 searchCity("Johannesburg");
 
 let currentLocation = document.querySelector("#button2");
-currentLocation.innerHTML = addEventListener("click", searchLocation);
+currentLocation.innerHTML = addEventListener("click", getCurrentLocation);
